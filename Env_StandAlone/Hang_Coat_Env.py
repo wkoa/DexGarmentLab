@@ -1,7 +1,6 @@
 from isaacsim import SimulationApp
 simulation_app = SimulationApp({"headless": False})
 
-import omni.kit.app
 from omni.isaac.core.utils.extensions import enable_extension
 enable_extension("omni.physx.demos")
 
@@ -10,36 +9,20 @@ import os
 import sys
 import time
 import numpy as np
-import open3d as o3d
 from termcolor import cprint
 import threading
 
 # load isaac-relevant package
-import omni.replicator.core as rep
-import isaacsim.core.utils.prims as prims_utils
-from pxr import UsdGeom,UsdPhysics,PhysxSchema, Gf
-from isaacsim.core.api import World
-from isaacsim.core.api import SimulationContext
-from isaacsim.core.api.objects import DynamicCuboid, FixedCuboid, VisualCuboid
-from isaacsim.core.utils.prims import is_prim_path_valid, set_prim_visibility, delete_prim
-from isaacsim.core.utils.string import find_unique_string_name
-from isaacsim.core.utils.viewports import set_camera_view
-from isaacsim.core.utils.stage import add_reference_to_stage, is_stage_loading
-from isaacsim.core.prims import SingleXFormPrim, SingleClothPrim, SingleRigidPrim, SingleGeometryPrim, SingleParticleSystem, SingleDeformablePrim
-from isaacsim.core.prims import XFormPrim, ClothPrim, RigidPrim, GeometryPrim, ParticleSystem
-from isaacsim.core.utils.rotations import euler_angles_to_quat
-from omni.physx.scripts import deformableUtils,particleUtils,physicsUtils
 
 # load custom package
 sys.path.append(os.getcwd())
 from Env_StandAlone.BaseEnv import BaseEnv
 from Env_Config.Garment.Particle_Garment import Particle_Garment
-from Env_Config.Garment.Deformable_Garment import Deformable_Garment
 from Env_Config.Robot.BimanualDex_Ur10e import Bimanual_Ur10e
 from Env_Config.Camera.Recording_Camera import Recording_Camera
 from Env_Config.Room.Real_Ground import Real_Ground
-from Env_Config.Room.Object_Tools import pothook_load, set_prim_visible_group, delete_prim_group
-from Env_Config.Utils_Project.Code_Tools import get_unique_filename, normalize_columns, plot_column_distributions
+from Env_Config.Room.Object_Tools import pothook_load, set_prim_visible_group
+from Env_Config.Utils_Project.Code_Tools import get_unique_filename, normalize_columns
 from Env_Config.Utils_Project.Parse import parse_args_record
 from Env_Config.Utils_Project.Point_Cloud_Manip import rotate_point_cloud
 from Model_HALO.GAM.GAM_Encapsulation import GAM_Encapsulation

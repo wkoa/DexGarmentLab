@@ -1,6 +1,9 @@
 from isaacsim import SimulationApp
 simulation_app = SimulationApp({"headless": False})
 
+from omni.isaac.core.utils.extensions import enable_extension
+enable_extension("omni.physx.demos")
+
 # load external package
 import os
 import sys
