@@ -24,7 +24,7 @@ class Particle_Garment:
         usd_path:str="Assets/Garment/Dress/Long_LongSleeve/DLLS_Dress008_0/DLLS_Dress008_0_obj.usd", 
         pos:np.ndarray=np.array([0.0, 0.0, 0.5]), 
         ori:np.ndarray=np.array([0.0, 0.0, 0.0]),
-        scale:np.ndarray=np.array([0.0085, 0.0085, 0.0085]),
+        scale:np.ndarray=np.array([1.0, 1.0, 01.0]),
         visual_material_usd:str="Assets/Material/Garment/linen_Pumpkin.usd",
         particle_system_enabled:bool=True,
         enable_ccd:bool=True,

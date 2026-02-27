@@ -17,9 +17,9 @@ DEBUG=${5} # True or False
 
 save_ckpt=True
 
-isaac_path=~/isaacsim_4.5.0/python.sh
+# isaac_path=~/isaacsim_4.5.0/python.sh
 
-export ISAAC_PATH=$isaac_path
+# export ISAAC_PATH=$isaac_path
 
 alg_name=robot_dp
 config_name=${alg_name}

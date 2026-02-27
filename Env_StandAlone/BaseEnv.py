@@ -36,7 +36,7 @@ class BaseEnv:
         # set stage
         self.stage = self.world.scene.stage
         # set simulation context
-        self.context = SimulationContext()
+        self.context = SimulationContext(stage_units_in_meters=1.0)
         # set physics context
         self.physics = self.world.get_physics_context()
         # set physics scene

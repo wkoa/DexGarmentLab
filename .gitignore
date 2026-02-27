@@ -3,6 +3,7 @@ Assets/LeapMotion
 Assets/Robots
 Assets/Scene
 Assets/Human
+*.zip
 Data/*
 !Data/*.py
 Tool_Scripts

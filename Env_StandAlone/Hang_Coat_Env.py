@@ -1,6 +1,10 @@
 from isaacsim import SimulationApp
 simulation_app = SimulationApp({"headless": False})
 
+import omni.kit.app
+from omni.isaac.core.utils.extensions import enable_extension
+enable_extension("omni.physx.demos")
+
 # load external package
 import os
 import sys
@@ -62,13 +66,14 @@ class HangCoat_Env(BaseEnv):
             visual_material_usd = ground_material_usd,
             # you can use materials in 'Assets/Material/Floor' to change the texture of ground.
         )
-        
+
         # load garment
         self.garment = Particle_Garment(
             self.world, 
             pos=np.array([0, 3.0, 0.6]),
             ori=np.array([0.0, 0.0, 0.0]),
-            usd_path=os.getcwd() + "/" + "Assets/Garment/Tops/Collar_Lsleeve_FrontOpen/TCLO_Jacket131/TCLO_Jacket131_obj.usd" if usd_path is None else usd_path,
+            usd_path="/home/ubuntu/DexGarmentLab/Assets/Garment/Tops/Collar_Lsleeve_FrontOpen/TCLO_Jacket131/TCLO_Jacket131_obj.usd" if usd_path is None else usd_path,
+            visual_material_usd="/home/ubuntu/DexGarmentLab/Assets/Material/Garment/linen_Pumpkin.usd",
             friction=25.0,
             contact_offset=0.015,             
             rest_offset=0.012,                
@@ -213,11 +218,11 @@ def HangCoat(pos, ori, usd_path, env_dx, env_dy, ground_material_usd, data_colle
     env.garment.particle_material.set_gravity_scale(0.7)
     
     # hide prim to get garment point cloud
-    set_prim_visible_group(
-        prim_path_list=["/World/DexLeft", "/World/DexRight", "/World/Garment/garment"],
-        visible=False,
-    )
-    for i in range(50):
+    # set_prim_visible_group(
+    #     prim_path_list=["/World/DexLeft", "/World/DexRight", "/World/Garment/garment"],
+    #     visible=False,
+    # )
+    for _ in range(50):
         env.step()
     
     env.object_pcd, color = env.object_camera.get_point_cloud_data_from_segment(
@@ -238,7 +243,7 @@ def HangCoat(pos, ori, usd_path, env_dx, env_dy, ground_material_usd, data_colle
         prim_path_list=["/World/DexLeft", "/World/DexRight", "/World/pothook1", "/World/pothook2", "/World/pothook3"],
         visible=False,
     )
-    for i in range(50):
+    for _ in range(50):
         env.step()
         
     pcd, color = env.garment_camera.get_point_cloud_data_from_segment(
@@ -252,7 +257,7 @@ def HangCoat(pos, ori, usd_path, env_dx, env_dy, ground_material_usd, data_colle
         prim_path_list=["/World/DexLeft", "/World/DexRight", "/World/pothook1", "/World/pothook2", "/World/pothook3"],
         visible=True,
     )
-    for i in range(50):
+    for _ in range(50):
         env.step()
     
     pcd_rotate = rotate_point_cloud(pcd, euler_angles=np.array([0, 0, 180]), center_point=env.garment.get_garment_center_pos())     

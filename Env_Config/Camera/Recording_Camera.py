@@ -17,7 +17,10 @@ from Env_Config.Utils_Project.Point_Cloud_Manip import furthest_point_sampling
 
 
 class Recording_Camera:
-    def __init__(self, camera_position:np.ndarray=np.array([0.0, 6.0, 2.6]), camera_orientation:np.ndarray=np.array([0, 20.0, -90.0]), frequency=20, resolution=(640, 480), prim_path="/World/recording_camera"):
+    def __init__(self, camera_position:np.ndarray=np.array([0.0, 6.0, 2.6]), 
+                 camera_orientation:np.ndarray=np.array([0, 20.0, -90.0]), 
+                 frequency=20, resolution=(640, 480), 
+                 prim_path="/World/recording_camera"):
         # define camera parameters
         self.camera_position = camera_position
         self.camera_orientation = camera_orientation
@@ -86,13 +89,14 @@ class Recording_Camera:
         real_time_watch:bool=False
         ):
         '''
-        get point_cloud's data and color(between[0, 1]) of each point, down_sample the number of points to be 2048, save it to be ply file(optional).
+            get point_cloud's data and color(between[0, 1]) of each point, down_sample the number of points to be 2048, save it to be ply file(optional).
         '''
         self.data=self.annotator.get_data()
         self.point_cloud=np.array(self.data["data"])
         pointRgb=np.array(self.data["info"]['pointRgb'].reshape((-1, 4)))
         self.colors = np.array(pointRgb[:, :3] / 255.0)
         if sample_flag:
+            print(f"original point cloud has {self.point_cloud.shape[0]} points")
             self.point_cloud, self.colors = furthest_point_sampling(self.point_cloud, self.colors, sampled_point_num)
         
         pcd = o3d.geometry.PointCloud()
